@@ -3,21 +3,12 @@ def base_image = "waltervargas/gnome-todo"
 node {
   checkout scm
 
-  stage("Build Docker Image"){
-    def image = docker.build("${base_image}:${env.GIT_BRANCH}")
-    //mail to: "waltervargas@linux.com", subject: ""
+  stage("Flatpak build"){
+    sh 'flatpak-builder --repo=repo dist org.gnome.Todo.Test.json'
   }
 
-  stage("Run Tests"){
-    image.inside {
-      dir('tests') {
-        sh "make check"
-      }
-    }
+  stage("Faltpak tests"){
+    sh 'flatpak-builder --run dist org.gnome.Todo.Test.json gnome-desktop-testing-runner gnome-todo'
   }
 
-  stage("Push image to docker registry"){
-    //image.push()
-    sh "echo pushing image"
-  }
 }

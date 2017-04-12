@@ -122,8 +122,8 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "git://github.com/albfan/gnome-todo.git",
-                    "branch": "docker"
+                    "url": "git://github.com/waltervargas/gnome-todo.git",
+                    "branch": "master"
                 }
             ]
         }
