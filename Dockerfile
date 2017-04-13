@@ -1,6 +1,18 @@
-FROM waltervargas/jhbuild-sysdeps-usefull-packages
+FROM fedora:25
 LABEL maintainer "waltervargas@linux.com"
 
-ENV PACKAGES gnome-todo
+ENV USER gnome
 
-RUN $HOME/.local/bin/jhbuild build $PACKAGES
+RUN useradd -m -u 1000 $USER
+
+ADD . $HOME/gnome-todo
+RUN chown -R $USER /home/$USER
+
+ENV PACKAGES flatpak flatpak-builder git ostree
+RUN dnf install -y $PACKAGES
+
+USER $USER
+WORKDIR $HOME/gnome-todo
+RUN flatpak --user remote-add gnome-nightly --from https://sdk.gnome.org/gnome-nightly.flatpakrepo \
+  && flatpak --user install gnome-nightly org.gnome.Sdk \
+  && flatpak --user install gnome-nightly org.gnome.Platform
