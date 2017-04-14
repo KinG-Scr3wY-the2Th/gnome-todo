@@ -13,6 +13,6 @@ RUN dnf install -y $PACKAGES
 
 USER $USER
 WORKDIR $HOME/gnome-todo
-RUN flatpak --user remote-add gnome-nightly --from https://sdk.gnome.org/gnome-nightly.flatpakrepo \
-  && flatpak --user install gnome-nightly org.gnome.Sdk \
-  && flatpak --user install gnome-nightly org.gnome.Platform
+RUN flatpak remote-add gnome-nightly --from https://sdk.gnome.org/gnome-nightly.flatpakrepo \
+  && flatpak install gnome-nightly org.gnome.Sdk \
+  && flatpak install gnome-nightly org.gnome.Platform
