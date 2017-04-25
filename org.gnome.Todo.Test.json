@@ -118,6 +118,21 @@
             ]
         },
         {
+            "name": "lcov",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "http://github.com/albfan/lcov.git",
+                    "branch": "v1.13"
+                },
+                {
+                    "type": "patch",
+                    "path": "lcov-fake-build-api.patch",
+                    "use-git": true
+                }
+            ]
+        },
+        {
             "name": "gnome-todo",
             "sources": [
                 {
