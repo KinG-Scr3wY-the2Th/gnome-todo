@@ -5,7 +5,7 @@ node {
 
   stage("Build"){
     sh """
-       PATH=$PATH:/usr/local/bin
+       export FLATPAK_USER_DIR=$HOME/.local/share/flatpak
        flatpak-builder --force-clean --repo=repo dist org.gnome.Todo.Test.json
 """
   }
